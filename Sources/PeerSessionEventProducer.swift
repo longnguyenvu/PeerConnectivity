@@ -83,11 +83,11 @@ extension PeerSessionEventProducer: MCSessionDelegate {
         self.observer.value = event
     }
     
-    internal func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL, withError error: Error?) {
+    internal func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
         NSLog("%@", "didFinishReceivingResourceWithName")
         
         let peer = Peer(peerID: peerID, status: .connected)
-        let event: PeerSessionEvent = .finishedReceivingResource(peer: peer, name: resourceName, url: localURL, error: error)
+        let event: PeerSessionEvent = .finishedReceivingResource(peer: peer, name: resourceName, url: localURL!, error: error)
         self.observer.value = event
     }
     
